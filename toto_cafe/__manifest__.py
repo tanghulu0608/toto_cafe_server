@@ -9,6 +9,7 @@
     
     """,
     'data': [
+        "security/ir.model.access.csv",
         "views/dinner.xml",
         "views/menus.xml",
     ],

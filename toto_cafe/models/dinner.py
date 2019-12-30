@@ -20,6 +20,7 @@ class TotoCafeDinner(models.Model):
         for dinner in self:
             dinner.remain = dinner.quantity - len(dinner.record_ids)
 
+
 class TotoCafeDinnerRecord(models.Model):
     _name = "toto_cafe.dinner.record"
 
