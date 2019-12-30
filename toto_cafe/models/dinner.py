@@ -15,6 +15,11 @@ class TotoCafeDinner(models.Model):
     record_ids = fields.One2many("toto_cafe.dinner.record", "dinner_id", string="记录", readonly=True)
     remain = fields.Integer(compute="_compute_remain", store=True, string="剩余餐数")
 
+    _sql_constraints = [
+        ('remain_constraint', 'check (remain<quantity)', '剩余餐数必须小于总餐数'),
+        ('remain_constraint', 'check (remain>=0)', '剩余餐数必须大于0')
+    ]
+
     @api.depends("record_ids")
     def _compute_remain(self):
         for dinner in self:
