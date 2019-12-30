@@ -1,5 +1,5 @@
 # _*_ coding: utf-8 _*_
-from odoo import models, fields, api
+from odoo import models, fields, api, exceptions
 
 
 class TotoCafeDinner(models.Model):
@@ -19,6 +19,16 @@ class TotoCafeDinner(models.Model):
     def _compute_remain(self):
         for dinner in self:
             dinner.remain = dinner.quantity - len(dinner.record_ids)
+
+    @api.constrains('date', 'type')
+    def date_type_constraint(self):
+        for dinner in self:
+            count_a = self.search_count([('date', '=', dinner.date), ('type', '=', 'a')])
+            count_b = self.search_count([('date', '=', dinner.date), ('type', '=', 'b')])
+            if count_a > 1:
+                raise exceptions.UserError('当天A餐已经存在')
+            if count_b > 1:
+                raise exceptions.UserError('当天B餐已经存在')
 
 
 class TotoCafeDinnerRecord(models.Model):
