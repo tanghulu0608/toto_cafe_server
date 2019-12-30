@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="cafe_root" name="Cafe" sequence="10"/>
+    <menuitem id="toto_cafe_dinner_menu" name="Cafe" sequence="10"
+              action="toto_cafe_dinner_action"
+              parent="cafe_root"/>
+</odoo>
