@@ -4,7 +4,7 @@
     <menuitem id="toto_cafe_dinner_menu" name="Cafe" sequence="10"
               action="toto_cafe_dinner_action"
               parent="cafe_root"/>
-    <menuitem id="toto_employee_menu" name="Employee" sequence="10"
+    <menuitem id="toto_dining_record_menu" name="Dining Record" sequence="10"
               action="toto_cafe_dinner_record_action"
               parent="cafe_root"/>
 </odoo>

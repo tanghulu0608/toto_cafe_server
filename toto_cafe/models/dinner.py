@@ -16,24 +16,17 @@ class TotoCafeDinner(models.Model):
     remain = fields.Integer(compute="_compute_remain", store=True, string="剩余餐数")
 
     _sql_constraints = [
-        ('remain_constraint', 'check (remain<quantity)', '剩余餐数必须小于总餐数'),
-        ('remain_constraint', 'check (remain>=0)', '剩余餐数必须大于0')
+        ('remain_constraint', 'check (remain>=0)', '当前餐已经没有剩余'),
+        ('date_type_constraint', 'unique(date, type)', '一天内只能有一次A餐或B餐')
     ]
+
+    def name_get(self):
+        return [(dinner.id, '%s-%s' % (dinner.date, dinner.type)) for dinner in self]
 
     @api.depends("record_ids")
     def _compute_remain(self):
         for dinner in self:
             dinner.remain = dinner.quantity - len(dinner.record_ids)
-
-    @api.constrains('date', 'type')
-    def date_type_constraint(self):
-        for dinner in self:
-            count_a = self.search_count([('date', '=', dinner.date), ('type', '=', 'a')])
-            count_b = self.search_count([('date', '=', dinner.date), ('type', '=', 'b')])
-            if count_a > 1:
-                raise exceptions.UserError('当天A餐已经存在')
-            if count_b > 1:
-                raise exceptions.UserError('当天B餐已经存在')
 
 
 class TotoCafeDinnerRecord(models.Model):
