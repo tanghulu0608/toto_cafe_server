@@ -5,15 +5,15 @@
         <field name="name">TOTO CAFE</field>
     </record>
 
-    <record id="cafe_consumer" model="res.groups">
-        <field name="name">Consumer</field>
+    <record id="group_cafe_user" model="res.groups">
+        <field name="name">Cafe User</field>
         <field name="category_id" ref="module_toto_cafe"/>
         <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
     </record>
 
-    <record id="cafe_manager" model="res.groups">
-        <field name="name">Manager</field>
+    <record id="group_cafe_manager" model="res.groups">
+        <field name="name">Cafe Manager</field>
         <field name="category_id" ref="module_toto_cafe"/>
-        <field name="implied_ids" eval="[(4, ref('cafe_consumer'))]"/>
+        <field name="implied_ids" eval="[(4, ref('group_cafe_user'))]"/>
     </record>
 </odoo>
