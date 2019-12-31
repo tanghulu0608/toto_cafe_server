@@ -8,6 +8,7 @@
                 <field name="type"/>
                 <field name="date"/>
                 <field name="quantity"/>
+                <field name="remain"/>
             </tree>
         </field>
     </record>
@@ -48,7 +49,41 @@
                 <field name="date"/>
                 <field name="quantity"/>
                 <field name="image"/>
+                <filter name="filter_today" string="Today"
+                        domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
             </search>
+        </field>
+    </record>
+
+    <record id="toto_cafe_dinner_record_view_tree" model="ir.ui.view">
+        <field name="name">toto_cafe.dinner.record.view.tree</field>
+        <field name="model">toto_cafe.dinner.record</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="no"/>
+                <field name="name"/>
+                <field name="section"/>
+                <field name="department"/>
+                <field name="dinner_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="toto_cafe_dinner_record_view_form" model="ir.ui.view">
+        <field name="name">toto_cafe.dinner.record.view.form</field>
+        <field name="model">toto_cafe.dinner.record</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group col="4">
+                        <field name="no"/>
+                        <field name="name"/>
+                        <field name="section"/>
+                        <field name="department"/>
+                        <field name="dinner_id"/>
+                    </group>
+                </sheet>
+            </form>
         </field>
     </record>
 
@@ -57,6 +92,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">toto_cafe.dinner</field>
         <field name="view_mode">tree,form</field>
+        <field name="context">{"search_default_filter_today":True}</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
                 <!-- Add Text Here -->
@@ -64,6 +100,20 @@
             <p>
                 <!-- More details about what a user can do with this object will be OK -->
             </p>
+        </field>
+    </record>
+
+    <record id="toto_cafe_dinner_record_action" model="ir.actions.act_window">
+        <field name="name">Dining Record</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">toto_cafe.dinner.record</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+          </p><p>
+            <!-- More details about what a user can do with this object will be OK -->
+          </p>
         </field>
     </record>
 </odoo>
