@@ -29,12 +29,27 @@ class TotoCafeDinner(models.Model):
         for dinner in self:
             dinner.remain = dinner.quantity - len(dinner.record_ids)
 
+    def add_record(self, department="", section="", name="", no=""):
+        self.ensure_one()
+        if "客人" not in name and \
+                self.record_ids.filtered_domain([('name', '=', name)]):
+            return "%s 扫码失败。请不要重复扫码。" % name
+        self.write({
+                "record_ids": [(0, 0, {
+                    "department": department,
+                    "section": section,
+                    "name": name,
+                    "no": no
+                })]}
+            )
+        return "%s 扫码成功。" % name
+
 
 class TotoCafeDinnerRecord(models.Model):
     _name = "toto_cafe.dinner.record"
 
     dinner_id = fields.Many2one("toto_cafe.dinner", ondelete="cascade")
-    department = fields.Char("部")
+    department = fields.Char(string="部")
     section = fields.Char(string="课")
     name = fields.Char(string="姓名")
     no = fields.Char(string="工号")
