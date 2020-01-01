@@ -21,7 +21,8 @@ class TotoCafeDinner(models.Model):
     ]
 
     def name_get(self):
-        return [(dinner.id, '%s-%s' % (dinner.date, dinner.type)) for dinner in self]
+        return [(dinner.id, '%s %s餐' % (dinner.date, dict(dinner._fields["type"].selection)[dinner.type]))
+                for dinner in self]
 
     @api.depends("record_ids")
     def _compute_remain(self):
