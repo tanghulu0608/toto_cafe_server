@@ -51,7 +51,25 @@
                 <field name="image"/>
                 <filter name="filter_today" string="Today"
                         domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter name="filter_seven_day" string="近7天"
+                        domain="[('date', '>=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                <filter name="filter_thirty_day" string="近30天"
+                        domain="[('date', '>=', (context_today() - datetime.timedelta(days=30)).strftime('%Y-%m-%d'))]"/>
+                <filter name="group_by_date" string="Date"
+                        context="{'group_by':'date'}"/>
             </search>
+        </field>
+    </record>
+
+    <record id="toto_cafe_dinner_view_pivot" model="ir.ui.view">
+        <field name="name">toto_cafe.dinner.view.pivot</field>
+        <field name="model">toto_cafe.dinner</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="date" interval="day" type="col"/>
+                <field name="type" type="row"/>
+                <field name="remain" type="measure"/>
+            </pivot>
         </field>
     </record>
 
@@ -87,11 +105,37 @@
         </field>
     </record>
 
+    <record id="toto_cafe_dinner_record_view_search" model="ir.ui.view">
+        <field name="name">toto_cafe.dinner.record.view.search</field>
+        <field name="model">toto_cafe.dinner.record</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="no"/>
+                <field name="name"/>
+                <filter name="group_by_section" string="课"
+                        context="{'group_by':'section'}"/>
+                <filter name="group_by_department" string="部门"
+                        context="{'group_by':'department'}"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="toto_cafe_dinner_record_view_pivot" model="ir.ui.view">
+        <field name="name">toto_cafe.dinner.record.view.pivot</field>
+        <field name="model">toto_cafe.dinner.record</field>
+        <field name="arch" type="xml">
+            <pivot>
+                <field name="department" type="col"/>
+                <field name="section" type="row"/>
+            </pivot>
+        </field>
+    </record>
+
     <record id="toto_cafe_dinner_action" model="ir.actions.act_window">
         <field name="name">TOTO Cafe</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">toto_cafe.dinner</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,pivot</field>
         <field name="context">{"search_default_filter_today":True}</field>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">
@@ -107,7 +151,7 @@
         <field name="name">Dining Record</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">toto_cafe.dinner.record</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,pivot</field>
         <field name="help" type="html">
           <p class="oe_view_nocontent_create">
             <!-- Add Text Here -->
