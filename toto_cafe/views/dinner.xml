@@ -51,6 +51,8 @@
                 <field name="image"/>
                 <filter name="filter_today" string="Today"
                         domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter name="filter_this_month" string="当月"
+                        domain="[('date', '&gt;=', context_today().strftime('%Y-%m-01'))]"/>
                 <filter name="filter_seven_day" string="近7天"
                         domain="[('date', '>=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
                 <filter name="filter_thirty_day" string="近30天"
