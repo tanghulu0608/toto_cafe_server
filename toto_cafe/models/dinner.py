@@ -49,6 +49,8 @@ class TotoCafeDinnerRecord(models.Model):
     _name = "toto_cafe.dinner.record"
 
     dinner_id = fields.Many2one("toto_cafe.dinner", ondelete="cascade")
+    type = fields.Selection(related="dinner_id.type", store=True)
+    date = fields.Date(related="dinner_id.date", store=True)
     department = fields.Char(string="部")
     section = fields.Char(string="课")
     name = fields.Char(string="姓名")
