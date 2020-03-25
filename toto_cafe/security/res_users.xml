@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="partner_cafe_client_computer" model="res.partner">
+        <field name="name">取餐窗口电脑</field>
+        <field name="image_1920" type="base64" file="base/static/img/avatar_grey.png"/>
+    </record>
+    <record id="user_cafe_client_computer" model="res.users">
+        <field name="name">取餐窗口电脑</field>
+         <field name="partner_id" ref="partner_cafe_client_computer"/>
+        <field name="login">client_computer</field>
+        <field name="groups_id" eval="[(4, ref('group_cafe_user'))]"/>
+    </record>
+</odoo>

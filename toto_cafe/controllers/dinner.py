@@ -6,7 +6,7 @@ from odoo import models, fields, api
 
 
 class Dinner(http.Controller):
-    @http.route("/dinner", type='http', auth="none")
+    @http.route("/dinner", type='http', auth="none", methods=['GET'])
     def dinner(self, with_image=False):
         dinners = http.request.env["toto_cafe.dinner"].sudo().search([
             ("date", "=", fields.Date.today())
@@ -18,7 +18,7 @@ class Dinner(http.Controller):
                             "image": dinner.image.decode() if with_image and dinner.image else "",
                             } for dinner in dinners])
 
-    @http.route("/dinner/<string:dinner_type>", type='http', auth="none", methods=['POST'], csrf=False)
+    @http.route("/dinner", type='http', auth="none", methods=['POST'], csrf=False)
     def dinner_take(self, dinner_type, department="", section="", name="", no=""):
         dinner = http.request.env["toto_cafe.dinner"].sudo().search([
             ("date", "=", fields.Date.today()),
