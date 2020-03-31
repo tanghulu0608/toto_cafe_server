@@ -24,8 +24,6 @@ class Dinner(http.Controller):
             ("date", "=", fields.Date.today()),
             ("type", "=", dinner_type)
         ])
-        admin = http.request.env["res.users"].browse(2)
-        # todo 应该改成下面这个
-        # user = http.request.env.ref("toto_cafe.user_cafe_client_computer")
+        user = http.request.env.ref("base.user_admin")
         if dinner:
-            return dinner.with_user(admin).add_record(department, section, name, no)
+            return json.dumps(dinner.with_user(user).add_record(department, section, name, no))

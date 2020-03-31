@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <menuitem id="cafe_root" name="Cafe" sequence="10"/>
-    <menuitem id="toto_cafe_dinner_menu" name="Cafe" sequence="10"
+    <menuitem id="cafe_root" name="餐厅管理" sequence="10"/>
+    <menuitem id="toto_cafe_dinner_menu" name="餐" sequence="10"
               action="toto_cafe_dinner_action"
               parent="cafe_root"/>
-    <menuitem id="toto_dining_record_menu" name="Dining Record" sequence="10"
+    <menuitem id="toto_dining_record_menu" name="扫描取餐记录" sequence="10"
               action="toto_cafe_dinner_record_action"
               parent="cafe_root"/>
 </odoo>

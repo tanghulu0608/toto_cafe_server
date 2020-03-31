@@ -1,2 +1,3 @@
 # _*_ coding: utf-8 _*_
 from . import dinner
+from . import res_users
