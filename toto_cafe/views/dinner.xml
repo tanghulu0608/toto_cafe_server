@@ -67,6 +67,7 @@
                                     <field name="date"/>
                                 </strong>
                                 <ul>
+                                    <li>类型: <field name="type"/></li>
                                     <li>餐数: <field name="quantity"/></li>
                                     <li>剩余: <field name="remain"/></li>
                                 </ul>
@@ -123,6 +124,7 @@
                 <field name="section"/>
                 <field name="department"/>
                 <field name="dinner_id"/>
+                <field name="create_date" string="扫描时间"/>
             </tree>
         </field>
     </record>

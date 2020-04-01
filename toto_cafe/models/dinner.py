@@ -4,7 +4,7 @@ from odoo import models, fields, api
 
 class TotoCafeDinner(models.Model):
     _name = "toto_cafe.dinner"
-
+    _order = "date desc, type"
     type = fields.Selection([
         ("a", "A"),
         ("b", "B"),
@@ -53,6 +53,7 @@ class TotoCafeDinner(models.Model):
 
 class TotoCafeDinnerRecord(models.Model):
     _name = "toto_cafe.dinner.record"
+    _order = "create_date"
 
     dinner_id = fields.Many2one("toto_cafe.dinner", ondelete="cascade")
     type = fields.Selection(related="dinner_id.type", store=True)
